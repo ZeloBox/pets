@@ -5,11 +5,25 @@
 public abstract class Animal {
     boolean isDie = false;
     boolean isSleep = false;
+    String animalName;
+    String voice;
 
-    public abstract void talk();
+    public Animal(String animalName) {
+        this.animalName = animalName;
+    }
+
+    public void talk() {
+        if (!isDie && !isSleep) {
+            System.out.println( this.getClass().getName()+" "+animalName + " say:"+voice);
+        } else {
+            System.out.println("Tss. "+ this.getClass().getName()+" "+animalName+" is sleeping now..... or die :((");
+        }
+    }
+
+    ;
 
     public void die() {
-        isDie = false;
+        isDie = true;
         System.out.println("I'm die." + this.getClass().getName());
     }
 
@@ -20,5 +34,6 @@ public abstract class Animal {
 
     public void awake() {
         System.out.println("I'm awake." + this.getClass().getName());
+        this.isSleep = false;
     }
 }

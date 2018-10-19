@@ -3,8 +3,8 @@
  **/
 public class Dog extends Animal{
 
-    @Override
-    public void talk() {
-        System.out.println("Gav !!!");
+    public Dog(String animalName) {
+        super(animalName);
+        voice="Gav !!!";
     }
 }
