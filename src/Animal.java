@@ -3,8 +3,8 @@
  **/
 
 public abstract class Animal {
-    boolean isDie = false;
-    boolean isSleep = false;
+    ELifeState eLifeState = ELifeState.AWAKEN;
+
     String animalName;
     String voice;
 
@@ -13,27 +13,32 @@ public abstract class Animal {
     }
 
     public void talk() {
-        if (!isDie && !isSleep) {
-            System.out.println( this.getClass().getName()+" "+animalName + " say:"+voice);
-        } else {
-            System.out.println("Tss. "+ this.getClass().getName()+" "+animalName+" is sleeping now..... or die :((");
+        switch (eLifeState) {
+            case AWAKEN:
+                System.out.println(this.getClass().getName() + " " + animalName + " say:" + voice);
+                break;
+            case SLEEPING:
+            case DEAD:
+                System.out.println("Tss. " + this.getClass().getName() + " " + animalName + " is sleeping now..... or die :((");
+                default:
+                    System.out.println("Error"+this.getClass().getName() + " " + animalName + " didn't bourn!!!");
         }
     }
 
     ;
 
     public void die() {
-        isDie = true;
+        eLifeState=ELifeState.DEAD;
         System.out.println("I'm die." + this.getClass().getName());
     }
 
     void sleep() {
-        System.out.println(this.getClass().getName()+" .I'm going to sleep.");
-        isSleep=true;
+        System.out.println(this.getClass().getName() + " .I'm going to sleep.");
+        eLifeState=ELifeState.SLEEPING;
     }
 
     public void awake() {
         System.out.println("I'm awake." + this.getClass().getName());
-        this.isSleep = false;
+        eLifeState=ELifeState.AWAKEN;
     }
 }
